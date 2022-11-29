@@ -1,0 +1,172 @@
+
+
+section .contentBx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+section .contentBx .formBx{
+    width: 60%;
+}
+
+section .contentBx .formBx h2{
+    color: #f0f3f5;
+    font-weight: 500;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid var(--myRed);
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+section .contentBx .formBx .inputBx{
+    margin-bottom: 20px;
+}
+
+/* Invaild data, red message */
+section .contentBx .formBx .inputBx .invaildmessage{
+    color: var(--myRed);
+    font-weight: 200;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+section .contentBx .formBx .inputBx span{
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #f0f3f5;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+section .contentBx .formBx .inputBx .pass:hover{
+    cursor: pointer;
+}
+
+section .contentBx .formBx .inputBx .pass svg{
+    fill: white;
+    width: 30px;
+    height: 30px;
+    transform: translateY(10px);
+}
+
+/* Invaild data red border. just add invailddata class*/
+section .contentBx .formBx .inputBx input.invailddata,
+section .contentBx .formBx .inputBx textarea.invailddata
+{
+    border: 1px solid var(--myRed);
+}
+
+section .contentBx .formBx .inputBx input,
+section .contentBx .formBx .inputBx textarea{
+    position: relative;
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 500;
+    border: 1px solid #f0f3f5;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #f0f3f5;
+    background: transparent; 
+    border-radius:10px 30px 30px 30px;
+}
+
+section .contentBx .formBx .inputBx textarea{
+    overflow: auto;
+	overflow-x: hidden;
+}
+
+section .contentBx .formBx .inputBx textarea::-webkit-scrollbar-track{
+    background-color: #444446;
+    border-radius: 100px;
+}
+
+section .contentBx .formBx .inputBx textarea::-webkit-scrollbar{
+    width: 8px;
+	background-color: var(--myBlack);
+    transform: translateY(20px);
+}
+
+section .contentBx .formBx .inputBx textarea::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+}
+
+section .contentBx .formBx .inputBx textarea::-webkit-scrollbar-thumb{
+    border-radius: 100px;
+	transform: translateY(20px);
+	background-color: #6F2232;
+}
+
+section .contentBx .formBx .inputBx input[type="submit"]{
+    background: var(--myRed);
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+section .contentBx .formBx .inputBx input[type="submit"]::before{
+    content: '<a id="showpass"></a>';
+}
+
+section .contentBx .formBx .inputBx input[type="submit"]:hover{
+    background: #91052f;
+}
+
+section .contentBx .formBx .remember,
+section .contentBx .formBx .terms{
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+section .contentBx .formBx .inputBx p{
+    color: #fff;
+}
+
+section .contentBx .formBx .inputBx p a,
+section .contentBx .formBx .terms a{
+    color: var(--myRed);
+}
+
+@media(max-width: 992px){
+    section .contentBx .formBx
+    {
+        width: 80%;
+    }
+}
+
+
+@media(max-width: 768px){
+    section .imgBx{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    section .contentBx{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    section .contentBx .formBx{
+        width: 100%;
+        padding: 40px;
+        margin: 50px;
+        background: #1a1a1dd7;
+    }
+}

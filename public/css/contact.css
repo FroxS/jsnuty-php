@@ -1,0 +1,47 @@
+.contact{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+    color: #fff;
+    width: 100%;
+}
+
+.contact .contentBx{
+    width: 700px;
+    background-color: var(--myBlack);
+    padding: 100px 20px;
+    -webkit-box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    border-radius: 20px;
+}
+
+.contact .contentBx input[type="submit"]{
+    width: 200px !important;
+}
+
+@media(max-width: 768px){
+    .contact{
+        margin-top: 80px;
+    }
+
+    .contact .contentBx{
+        width: 100%;
+        padding: 80px 10px;
+    }
+    .contact .contentBx input[type="submit"]{
+        width: 100% !important;
+    }
+
+    .contact .contentBx .formBx{
+        margin: 0px;
+        padding: 10px;
+    }
+
+    .contact .contentBx .formBx h2{
+        text-align: center;
+    }
+
+}

@@ -1,0 +1,48 @@
+
+
+/* Music */
+
+.songs{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 150px 150px;
+    flex-direction: column;
+}
+
+/* first box */
+.song{
+    border-radius: 20px;
+    display: flex;
+    padding: 20px;
+    background: var(--myBlack);
+    -webkit-box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 21px 0px rgba(0,0,0,0.75);
+    color: var(--font);
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.song .frame{
+    width: 500px;
+    height: 400px;
+    position: relative;
+}
+
+.song iframe{
+    width: 500px;
+    height: 400px;
+    position: relative;
+}
+
+.song .data{
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.song .data h1{
+    margin-bottom: 50px;
+}
