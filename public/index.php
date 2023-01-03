@@ -16,6 +16,11 @@ require_once __DIR__."/../app/library/Application.php";
 
 $config = [
     'userClass' => \jsnuty\app\models\User::class,
+    // 'db' => [
+    //     'dsn' => 'mysql:host=localhost;port=3306;dbname=froxs1231',
+    //     'user' => 'kubaMainUser1231',
+    //     'password' => 'dsaer$fs3X'
+    // ],
     'db' => [
         'dsn' => 'mysql:host=localhost;port=3306;dbname=php-mvc',
         'user' => 'root',
@@ -39,6 +44,7 @@ $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
 $app->router->get('/profile', [AuthController::class, 'profile']);
+$app->router->post('/profile', [AuthController::class, 'profile']);
 
 $app->router->get('/logout', [AuthController::class, 'logout']);
 

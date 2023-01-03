@@ -6,6 +6,7 @@ use jsnuty\app\models\Music;
 use jsnuty\app\library\Request;
 use jsnuty\app\library\Response;
 use jsnuty\app\library\Controller;
+use jsnuty\app\library\Application;
 
 class MusicController extends Controller
 {
@@ -20,8 +21,12 @@ class MusicController extends Controller
         $params = [
             'songs' => $data
         ];
-
-        return $this->render('music', $params);
+        if(!Application::isGuest()){
+            return $this->render('music', $params);
+        }else{
+            $response->redirect('/jsnuty/login');
+        }
+            
     }
 
     public function getSongs(){

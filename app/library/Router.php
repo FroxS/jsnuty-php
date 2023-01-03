@@ -41,7 +41,7 @@ class Router
         $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
 
-        //dump($path);
+        //dump([$this->routes,$path, $method, $callback ]);
 
         if(!$callback){
             throw new NotFoundException();

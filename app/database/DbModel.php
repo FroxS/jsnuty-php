@@ -21,18 +21,50 @@ abstract class DbModel extends Model
         $params = array_map(fn($attr) => ":$attr", $attributes);
         
         $where = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
-
+        
         $sql = "
             INSERT INTO $tableName (".implode(',', $attributes).") 
             VALUES (".implode(',', $params).")
         ";
-
+        dump($sql);
         $statment = self::prepare($sql);
         foreach ($attributes as $attribute) {
             $statment->bindValue(":$attribute", $this->{$attribute});
         }
         $statment->execute(); 
         return true;
+    }
+
+
+    public function update()
+    {
+
+        try {
+            $tableName = $this->tableName();
+            $attributes = $this->attributes();
+
+            $params = array_map(fn($attr) => ":$attr", $attributes);
+            //dump($this->{$this->primaryKey()});
+            $set = implode(" , ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $where = $this->primaryKey() . "= :" . $this->primaryKey();
+            
+            $sql = "
+                UPDATE $tableName SET $set 
+                WHERE $where
+            ";
+            
+            $statment = self::prepare($sql);
+            foreach ($attributes as $attribute) {
+                $statment->bindValue(":$attribute", $this->{$attribute});
+            }
+            $statment->bindValue(":".$this->primaryKey(), $this->{$this->primaryKey()});
+            $statment->execute(); 
+            return true;
+        } catch (Exception $e) {
+            Application::$app->session->setFlash('error', $e->getMessage());
+            return false;
+        }
+        
     }
 
     public static function findOne($where)

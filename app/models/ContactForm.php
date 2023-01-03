@@ -4,8 +4,6 @@ namespace jsnuty\app\models;
 use jsnuty\app\library\Model;
 
 class ContactForm extends Model{
-
-
     public string $email = '';
     public string $text = '';
 

@@ -8,6 +8,7 @@ use jsnuty\app\library\Controller;
 use jsnuty\app\library\Application;
 use jsnuty\app\library\Response;
 use jsnuty\app\models\LoginForm;
+use jsnuty\app\models\ProfilForm;
 
 class AuthController extends Controller
 {
@@ -31,7 +32,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-       
         $user = new User();
         $this->setLayout('auth');
         if($request->isPost()){
@@ -52,9 +52,31 @@ class AuthController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {   
-        return $this->render('profile');
+        if(!Application::isGuest()){
+            $contact = new ProfilForm();
+            $contact->email = Application::$app->user->email;
+            $contact->username = Application::$app->user->username;
+            $contact->id = Application::$app->user->id;
+            if($request->isPost()){
+                $contact->loadData($request->getBody());
+                
+                if($contact->validate() && $contact->update()){
+                    Application::$app->session->setFlash('success', 'Udało się zaktualizować dane');
+                }
+                return $this->render('profile',[
+                    'model' => $contact
+                ]);
+            }
+            return $this->render('profile',[
+                'model' => $contact
+            ]);
+
+            //return $this->render('profile');
+        }
+        else
+            $response->redirect('/jsnuty/login');
     }
 
     public function logout(Request $request, Response $response)
