@@ -26,7 +26,6 @@ abstract class DbModel extends Model
             INSERT INTO $tableName (".implode(',', $attributes).") 
             VALUES (".implode(',', $params).")
         ";
-        dump($sql);
         $statment = self::prepare($sql);
         foreach ($attributes as $attribute) {
             $statment->bindValue(":$attribute", $this->{$attribute});
