@@ -46,3 +46,22 @@
 .song .data h1{
     margin-bottom: 50px;
 }
+
+.song .add{
+    background: var(--myBlack);
+    color: var(--font);
+    border-radius: 10px;
+    padding: 10px 20px;
+    border-color: var(--font);
+}
+
+.song .add a{
+    color: var(--font);
+}
+
+.song .add:hover{
+    cursor: pointer;
+    -webkit-box-shadow: 5px 5px 40px -5px rgb(44, 44, 44);
+    -moz-box-shadow: 5px 5px 40px -5px rgb(44, 44, 44);
+    box-shadow: 5px 5px 40px -5px rgb(44, 44, 44);
+}

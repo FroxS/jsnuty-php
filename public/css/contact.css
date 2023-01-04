@@ -18,6 +18,10 @@
     border-radius: 20px;
 }
 
+.contentBx a{
+    color: #fff;
+}
+
 .contact .contentBx input[type="submit"]{
     width: 200px !important;
 }

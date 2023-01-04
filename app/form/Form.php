@@ -17,8 +17,8 @@ class Form
         return '</form>';
     }
 
-    public function field(Model $model, $atttribute)
+    public function field(Model $model, $atttribute, $hidden = false)
     {
-        return new InputField($model, $atttribute);
+        return new InputField($model, $atttribute, $hidden);
     }
 }

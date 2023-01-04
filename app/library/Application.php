@@ -74,8 +74,10 @@ class Application
     public function run()
     {
         try{
+            //$this->request->getAddress();
             echo $this->router->resolve();
         }catch(\Throwable $e){
+            //dump($e);
             $this->response->setStatusCode($e->getCode());
             echo $this->view->renderView('_error', ['exception' => $e]);
         }         
@@ -104,6 +106,12 @@ class Application
     public static function isGuest()
     {
         return !self::$app->user;
+    }
+
+    public static function getAddres()
+    {
+        return $this->request->getAddress();
+        //return "http://localhost/jsnuty/";
     }
 
 }

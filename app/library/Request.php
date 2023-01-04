@@ -6,6 +6,11 @@ namespace jsnuty\app\library;
 
 class Request
 {
+    public function getAddres()
+    {
+        return "http://$_SERVER[HTTP_HOST]";
+    }
+
     public function getPath()
     {
 
@@ -22,11 +27,16 @@ class Request
         if(strstr($path, 'jsnuty')){
             $path = substr($path,7);
         }
+
+
         if(!$position){
             return $path;
         }else{
-            return substr($path,0, $position);
+            $path = substr($path,0, $position);
         }
+
+        $path = substr($path, 0, strpos($path, "?"));
+        return $path;
     }
 
     public function method()

@@ -11,6 +11,7 @@ class View
         $viewContent = $this->renderOnlyView($view, $params);
         $layoutContent = $this->layoutContent();
         $navigation = $this->navigation(Application::$app->navigation);
+        
         return str_replace([
                 '{{content}}',
                 '{{navigation}}'
@@ -24,10 +25,13 @@ class View
 
     public function layoutContent()
     {
+        
         $layout = Application::$app->layout;
+        
         if(Application::$app->controller){
             $layout = Application::$app->controller->layout;
         } 
+        //dump(file_exists(Application::$ROOT_DIR."/app/templates/layout/$layout.php"));
         ob_start();
         include_once Application::$ROOT_DIR."/app/templates/layout/$layout.php";
         return ob_get_clean();

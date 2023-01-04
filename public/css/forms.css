@@ -27,6 +27,10 @@ section .contentBx .formBx .inputBx{
     margin-bottom: 20px;
 }
 
+.inputBx.hidden{
+    display: none;
+}
+
 /* Invaild data, red message */
 section .contentBx .formBx .inputBx .invaildmessage{
     color: var(--myRed);

@@ -2,7 +2,7 @@
     use jsnuty\app\library\Application;
 ?>
 <header class="nav">
-    <a href="/jsnuty/"><img src="img/logo-white.png" class="logo"></a>
+    <a href="/jsnuty/"><img src="/jsnuty/img/logo-white.png" class="logo"></a>
     <div class="toggle" onclick="toggleMenu()"></div>
     <nav>
         <ul class="navigation">

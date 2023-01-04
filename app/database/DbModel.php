@@ -8,11 +8,16 @@ use jsnuty\app\library\Model;
 
 abstract class DbModel extends Model
 {
+    public $pdo;
     abstract static public function tableName(): string;
     
     abstract public function attributes(): array;
 
     abstract static public function primaryKey(): string;
+
+    function __construct() {
+        $this->pdo = Application::$app->db->pdo;
+    }
 
     public function save()
     {
@@ -30,14 +35,36 @@ abstract class DbModel extends Model
         foreach ($attributes as $attribute) {
             $statment->bindValue(":$attribute", $this->{$attribute});
         }
+
         $statment->execute(); 
+
+        
+        if(property_exists($this, $this->primaryKey())){
+            $this->{$this->primaryKey()} = Application::$app->db->pdo->lastInsertId();
+        }
+
         return true;
     }
 
 
+    public function delete()
+    {
+        //DELETE FROM `music_user` WHERE 0
+        $tableName = $this->tableName();
+        $where = $this->primaryKey() . "= :" . $this->primaryKey();
+        $sql = "
+            DELETE FROM $tableName 
+            WHERE $where
+        ";
+
+        $statment = self::prepare($sql);
+        $statment->bindValue(":".$this->primaryKey(), $this->{$this->primaryKey()});
+        $statment->execute(); 
+        return true;
+    }
+
     public function update()
     {
-
         try {
             $tableName = $this->tableName();
             $attributes = $this->attributes();
@@ -76,7 +103,7 @@ abstract class DbModel extends Model
         $sql = "SELECT * FROM $tableName WHERE $sql";
         
         $statment = self::prepare("$sql");
-
+        
         foreach($where as $key => $value){
             $statment->bindValue(":$key", $value);
         }
@@ -88,6 +115,8 @@ abstract class DbModel extends Model
 
     public static function prepare($sql)
     {
+        //return $this->pdo->prepare($sql);
         return Application::$app->db->pdo->prepare($sql);
     }
+
 }

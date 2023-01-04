@@ -41,8 +41,6 @@ class Router
         $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
 
-        //dump([$this->routes,$path, $method, $callback ]);
-
         if(!$callback){
             throw new NotFoundException();
         }
@@ -58,7 +56,6 @@ class Router
             $controller->actions = $callback[1];
             $callback[0] = $controller;
         }
-
         return call_user_func($callback, $this->request, $this->response);
     }
 

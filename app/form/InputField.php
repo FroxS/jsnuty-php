@@ -11,11 +11,12 @@ class InputField extends BaseField
     public const TYPE_NUMBER = 'number';
 
     public string $type;
+    
 
-    public function __construct(Model $model, $attriubte)
+    public function __construct(Model $model, $attriubte, $hidden= false)
     {
         $this->type = self::TYPE_TEXT;
-        parent::__construct($model, $attriubte);
+        parent::__construct($model, $attriubte,$hidden);
     }
 
     public function passworldField()

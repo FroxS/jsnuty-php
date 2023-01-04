@@ -9,6 +9,7 @@ use jsnuty\app\form\AreaField;
 
                 <h2>Kontakt</h2>
                 <?php $form = Form::begin('', 'post') ?>
+                
                 <?php echo $form->field($model, 'email') ?>
                 <?php echo new AreaField($model, 'text') ?>
                 <div class="inputBx">

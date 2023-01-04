@@ -52,6 +52,15 @@ $app->router->get('/music', [MusicController::class, 'music']);
 $app->router->post('/music', [MusicController::class, 'music']);
 
 
+$app->router->get('/music/add', [MusicController::class, 'addmusic']);
+$app->router->post('/music/add', [MusicController::class, 'addmusic']);
+
+$app->router->get('/music/edit', [MusicController::class, 'editmusic']);
+$app->router->post('/music/edit', [MusicController::class, 'editmusic']);
+
+$app->router->get('/music/delete', [MusicController::class, 'deletemusic']);
+
+
 
 //dump($app->router->routes);
 
