@@ -16,11 +16,6 @@ require_once __DIR__."/../app/library/Application.php";
 
 $config = [
     'userClass' => \jsnuty\app\models\User::class,
-    // 'db' => [
-    //     'dsn' => 'mysql:host=localhost;port=3306;dbname=froxs1231',
-    //     'user' => 'kubaMainUser1231',
-    //     'password' => 'dsaer$fs3X'
-    // ],
     'db' => [
         'dsn' => 'mysql:host=localhost;port=3306;dbname=php-mvc',
         'user' => 'root',
