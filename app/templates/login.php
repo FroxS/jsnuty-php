@@ -24,7 +24,7 @@ use jsnuty\app\form\Form;
                 <input type="submit" value="Zarejestruj sie">
             </div>
             <div class="inputBx">
-                <p>Nie masz kona? <a href="/jsnuty/register">Zarejestruj sie</a></p>
+                <p>Nie masz konta? <a href="/jsnuty/register">Zarejestruj sie</a></p>
             </div>
             <?php echo Form::end() ?>
             
