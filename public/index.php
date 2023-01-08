@@ -1,6 +1,5 @@
 <?php
 
-//use Dotenv\Dotenv;
 use jsnuty\app\library\Application;
 use jsnuty\app\controllers\AuthController;
 use jsnuty\app\controllers\SiteController;
@@ -9,23 +8,16 @@ use jsnuty\app\controllers\MusicController;
 
 require_once __DIR__."/../app/helpers/debug.php";
 require_once __DIR__."/../app/library/Application.php";
-//require_once __DIR__."/../vendor/autoload.php";
 
-//$dotenv = Dotenv::createImmutable(dirname(__DIR__));
-//$dotenv->load();
+$db = file_get_contents(__DIR__."/../db.json");
+  
 
 $config = [
     'userClass' => \jsnuty\app\models\User::class,
-    'db' => [
-        'dsn' => 'mysql:host=localhost;port=3306;dbname=php-mvc',
-        'user' => 'root',
-        'password' => ''
-    ]
+    'db' => json_decode($db,true)["DB"]
 ];
 
 $app = new Application(dirname(__DIR__), $config);
-
-//dump($app->request->getPath());
 
 $app->router->get('/', [SiteController::class, 'home']);
 
@@ -41,6 +33,9 @@ $app->router->post('/register', [AuthController::class, 'register']);
 $app->router->get('/profile', [AuthController::class, 'profile']);
 $app->router->post('/profile', [AuthController::class, 'profile']);
 
+$app->router->get('/profile/password', [AuthController::class, 'changePassword']);
+$app->router->post('/profile/password', [AuthController::class, 'changePassword']);
+
 $app->router->get('/logout', [AuthController::class, 'logout']);
 
 $app->router->get('/music', [MusicController::class, 'music']);
@@ -54,10 +49,6 @@ $app->router->get('/music/edit', [MusicController::class, 'editmusic']);
 $app->router->post('/music/edit', [MusicController::class, 'editmusic']);
 
 $app->router->get('/music/delete', [MusicController::class, 'deletemusic']);
-
-
-
-//dump($app->router->routes);
 
 $app->run();
 

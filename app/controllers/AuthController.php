@@ -3,6 +3,7 @@
 namespace jsnuty\app\controllers;
 
 use jsnuty\app\models\User;
+use jsnuty\app\models\UserChangePass;
 use jsnuty\app\library\Request;
 use jsnuty\app\library\Controller;
 use jsnuty\app\library\Application;
@@ -52,7 +53,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function profile(Request $request)
+    public function profile(Request $request, Response $response)
     {   
         if(!Application::isGuest()){
             $contact = new ProfilForm();
@@ -64,6 +65,7 @@ class AuthController extends Controller
                 
                 if($contact->validate() && $contact->update()){
                     Application::$app->session->setFlash('success', 'Udało się zaktualizować dane');
+                    $response->redirect('/jsnuty/profile');
                 }
                 return $this->render('profile',[
                     'model' => $contact
@@ -85,4 +87,35 @@ class AuthController extends Controller
         Application::$app->session->setFlash('info', 'Succes logout');
         $response->redirect('/jsnuty/');
     }
+
+    public function changePassword(Request $request, Response $response)
+    {
+        if(!Application::isGuest()){
+            $user = new UserChangePass();
+
+            if($request->isPost()){
+                $user->loadData($request->getBody());
+                $user->id = Application::$app->user->id;
+
+                if($user->validate() && $user->update()){
+                    Application::$app->session->setFlash('success', 'Udało się zmienic hasło');
+                }else{
+                    Application::$app->session->setFlash('error', 'Nie udało się zmienić hasła');
+                    return $this->render('changePassword',[
+                        'model' => $user
+                    ]);
+                }
+                $response->redirect('/jsnuty/profile');
+            }
+
+            return $this->render('changePassword',[
+                'model' => $user
+            ]);
+        }
+        else{
+            $response->redirect('/jsnuty/login');
+        }
+           
+    }
+    
 }

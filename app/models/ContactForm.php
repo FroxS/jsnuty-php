@@ -26,7 +26,7 @@ class ContactForm extends Model{
     }
 
     public function send(){
-        // Send message Comming soon
+        //TODO: Send message Comming soon
         return true;
     }
 }

@@ -47,26 +47,26 @@ abstract class Model
                 }
 
                 if($ruleName === self::RULE_REQUIRED && !$value){
-                    $this->addErrorForRule($attribute, self::RULE_REQUIRED);
+                    $this->addErrorForRule($attribute, self::RULE_REQUIRED,$rule);
                 }
 
                 if($ruleName === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)){
-                    $this->addErrorForRule($attribute, self::RULE_EMAIL);
+                    $this->addErrorForRule($attribute, self::RULE_EMAIL,$rule);
                 }
 
                 if($ruleName === self::RULE_MIN && strlen($value) < $rule['min']){
                     
-                    $this->addErrorForRule($attribute, self::RULE_MIN);
+                    $this->addErrorForRule($attribute, self::RULE_MIN,$rule);
                 }
 
                 if($ruleName === self::RULE_MAX && strlen($value) > $rule['max']){
 
-                    $this->addErrorForRule($attribute, self::RULE_MAX);
+                    $this->addErrorForRule($attribute, self::RULE_MAX,$rule);
                 }
 
                 if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}){
                     
-                    $this->addErrorForRule($attribute, self::RULE_MATCH);
+                    $this->addErrorForRule($attribute, self::RULE_MATCH,$rule);
                 }
 
                 if($ruleName === self::RULE_UNIQUE){
@@ -97,6 +97,9 @@ abstract class Model
         $message = $this->errorMessages()[$rule] ?? '';
         foreach ($params as $key => $value) {
             $message = str_replace("{{$key}}", $value, $message);
+            if(array_key_exists($value,$this->labels())){
+                $message = str_replace("{label}", $this->labels()[$value], $message);
+            }
         }
         $this->errors[$attribute][] = $message;
     }
@@ -107,7 +110,8 @@ abstract class Model
             self::RULE_EMAIL => 'Wpisz poprawny adres email',
             self::RULE_MIN => 'Minimalna długość tego pola to {min}',
             self::RULE_MAX => 'Maksymalna długość tego pola to {max}',
-            self::RULE_MATCH => 'Te pola nie są takie same {maatch}',
+            //self::RULE_MATCH => 'Te pola nie są takie same {match}',
+            self::RULE_MATCH => 'To pole nie pasuje do pola {label}',
             self::RULE_UNIQUE => 'Rekord z {field} już istnieje'
         ];
     }

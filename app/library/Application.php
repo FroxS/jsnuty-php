@@ -20,6 +20,7 @@ require_once __DIR__."/../controllers/AuthController.php";
 require_once __DIR__."/../models/ContactForm.php";
 require_once __DIR__."/../models/Music.php";
 require_once __DIR__."/../models/User.php";
+require_once __DIR__."/../models/UserChangePass.php";
 require_once __DIR__."/../models/LoginForm.php";
 require_once __DIR__."/../models/ProfilForm.php";
 require_once __DIR__."/../form/BaseField.php";

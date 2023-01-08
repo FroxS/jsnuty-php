@@ -87,7 +87,6 @@ abstract class DbModel extends Model
             $statment->execute(); 
             return true;
         } catch (Exception $e) {
-            Application::$app->session->setFlash('error', $e->getMessage());
             return false;
         }
         

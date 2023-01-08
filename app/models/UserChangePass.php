@@ -4,18 +4,11 @@ namespace jsnuty\app\models;
 
 use jsnuty\app\library\UserModel;
 
-class User extends UserModel
+class UserChangePass extends UserModel
 {
-    const STATUS_INACTIVE = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_DELETED = 2;
-
-    public string $username = '';
-    public string $email = '';
     public string $password = '';
     public string $confirmPassword = '';
-    public $terms = '';
-    public int $status = self::STATUS_INACTIVE;
+    public string $id;
 
     public static function tableName(): string
     {
@@ -35,20 +28,13 @@ class User extends UserModel
     public function rules()
     {
         return [
-            'username' => [self::RULE_REQUIRED, 
-                [self::RULE_UNIQUE, 'class' => self::class]
-            ],
-            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, 
-                [self::RULE_UNIQUE, 'class' => self::class]
-            ],
             'password' => [self::RULE_REQUIRED, 
                 [self::RULE_MIN, 'min' => 8], 
                 [self::RULE_MAX, 'max' => 24]
             ],
             'confirmPassword' => [self::RULE_REQUIRED, 
                 [self::RULE_MATCH, 'match' => 'password']
-            ],
-            'terms' => [self::RULE_REQUIRED]
+            ]
         ];
     }
 
@@ -62,16 +48,20 @@ class User extends UserModel
     public function labels(): array
     {
         return [
-            'username' => 'Nazwa użytkownika',
-            'email' => 'Email',
-            'password' => 'Hasło',
+            'password' => 'Nowe hasło',
             'confirmPassword' => 'Potwierdź hasło'
         ];
     }
 
     public function attributes(): array 
     {
-        return ['username', 'email', 'password', 'status'];
+        return ['password'];
     }
+
+    public function update(){
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::update();
+    }
+
 
 }
